@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     static final String DATABASE_NAME = "data pribadi.db";
 
     public static final String TABLE_SQLite = " data diri ";
-
     public static final  String COLUMN_ID = "id";
     public static final  String COLUMN_NAME = "name";
     public static final  String COLUMN_ADDRESS = "address";
@@ -41,13 +40,15 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public ArrayList<HashMap<String, String>> getAllData(){
-        ArrayList<HashMap<String, String>> wordList;
-        wordList = new ArrayList<HashMap<String, String>>();
+    public ArrayList<HashMap<String, String>> getAllData()
+    {
+        ArrayList <HashMap<String, String>> wordList;
+        wordList = new ArrayList <HashMap<String, String>>();
         String selectQuery = " SELECT * FROM " + TABLE_SQLite;
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery,null);
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst())
+        {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
                 map.put(COLUMN_ID, cursor.getString(0));
@@ -57,23 +58,25 @@ public class DbHelper extends SQLiteOpenHelper {
             }while (cursor.moveToNext());
         }
 
-        Log.e("select sqlite", "" + wordList);
+        Log.e("select sqlite ", "" + wordList);
 
         database.close();
         return wordList;
     }
 
-    public void insert(String name, String address){
+    public void insert(String name, String address)
+    {
         SQLiteDatabase database = this.getWritableDatabase();
         String queryValues = "INSERT INTO " + TABLE_SQLite + " (name, address) " +
-                "VALUES (' " + name + "','" + address + "')";
+                "VALUES (' " + name + "','" + address + " ')";
 
         Log.e("insert sqLite ", "" + queryValues);
         database.execSQL(queryValues);
         database.close();
     }
 
-    public void update(int id, String name, String address){
+    public void update(int id, String name, String address)
+    {
         SQLiteDatabase database = this.getWritableDatabase();
 
         String updateQuery = "UPDATE " + TABLE_SQLite + " SET "
@@ -85,7 +88,8 @@ public class DbHelper extends SQLiteOpenHelper {
         database.close();
     }
 
-    public void delete (int id){
+    public void delete (int id)
+    {
         SQLiteDatabase database = this.getWritableDatabase();
 
         String updateQuery = "DELETE FROM " + TABLE_SQLite + " WHERE " + COLUMN_ID + "=" + "'" + id + "'" ;

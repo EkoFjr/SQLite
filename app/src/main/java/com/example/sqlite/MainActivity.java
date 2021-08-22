@@ -21,20 +21,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     ListView listView;
     AlertDialog.Builder dialog;
-    Adapter adapter;
     List<Data> itemList = new ArrayList<Data>();
     DbHelper SQLite = new DbHelper(this);
+    Adapter adapter;
 
     public static final String TAG_ID = "id";
     public static final String TAG_NAME = "name";
     public static final String TAG_ADDRESS = "address";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -46,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.list_view);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent intent = new Intent (MainActivity.this,AddEdit.class);
                 startActivity(intent);
             }
@@ -59,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id)
+            {
 
                 final String idx = itemList.get(position).getId();
                 final String name = itemList.get(position).getName();
@@ -68,9 +73,11 @@ public class MainActivity extends AppCompatActivity {
                 final CharSequence[] dialogitem = {"Edit", "Delete"};
                 dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setCancelable(true);
-                dialog.setItems(dialogitem, new DialogInterface.OnClickListener() {
+                dialog.setItems(dialogitem, new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
 
                         switch (which){
                             case 0 :
@@ -94,10 +101,12 @@ public class MainActivity extends AppCompatActivity {
         getAllData();
     }
 
-    private void getAllData() {
+    private void getAllData()
+    {
         ArrayList<HashMap<String, String>>row=SQLite.getAllData();
 
-        for (int i = 0; i < row.size(); i++){
+        for (int i = 0; i < row.size(); i++)
+        {
             String id = row.get(i).get(TAG_ID);
             String poster = row.get(i).get(TAG_NAME);
             String title = row.get(i).get(TAG_ADDRESS);
@@ -112,7 +121,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         itemList.clear();
         getAllData();

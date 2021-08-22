@@ -13,33 +13,40 @@ import com.example.sqlite.model.Data;
 
 import java.util.List;
 
-public class Adapter extends BaseAdapter {
+public class Adapter extends BaseAdapter
+{
     private Activity activity;
     private LayoutInflater inflater;
     private List<Data> items;
 
-    public Adapter(Activity activity, List<Data> items){
+    public Adapter(Activity activity, List<Data> items)
+    {
         this.activity = activity;
         this.items = items;
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return items.size();
     }
 
     @Override
-    public Object getItem(int location) {
+    public Object getItem(int location)
+    {
+
         return items.get(location);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         if (inflater == null)
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
